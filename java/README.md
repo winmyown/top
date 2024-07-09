@@ -1,3 +1,10 @@
+## 目的
+all in ide(idea)
+所有资料全在idea 中看不用在其他软件来回切换
+markdown 支持custom css、mermaid、plantuml 
+
+jmh plugin
+
 ## 整体思路
 
 ### 零、包的分析
