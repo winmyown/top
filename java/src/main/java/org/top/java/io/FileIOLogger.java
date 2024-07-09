@@ -9,6 +9,12 @@ import java.io.IOException;
 public class FileIOLogger {
     private static final Logger logger = LoggerFactory.getLogger(FileIOLogger.class);
 
+    //@org.openjdk.jmh.annotations.Benchmark
+    //public void measureName(org.openjdk.jmh.infra.Blackhole bh) {
+    //
+    //
+    //}
+
     public static void main(String[] args) {
         logger.info("Thread {} starts reading file", Thread.currentThread().getName());
         try (FileInputStream fis = new FileInputStream("input.txt")) {

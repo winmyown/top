@@ -1,70 +1,9 @@
 <style>
-.hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-meta, .hljs-number, .hljs-params, .hljs-type {
-    color: blue;
-}
-.hljs {
-    display: block;
-    overflow-x: auto;
-    padding: 16px;
-    color: #abb2bf;
-    background: blue;
-}
-/* 代码块内的关键字样式 */
-pre code .java .hljs-keyword {
-    color: blue; /* 关键字颜色 */
-    font-weight: bold; /* 加粗 */
-}
-
-/* 代码块内的字符串样式 */
-pre code .hljs-string {
-    color: blue; /* 字符串颜色 */
-}
-
-/* 代码块内的注释样式 */
-pre code .hljs-comment {
-    color: blue; /* 注释颜色 */
-    font-style: italic; /* 斜体 */
-}
-
-/* 代码块内的函数名样式 */
-pre code .hljs-function {
-    color: blue; /* 函数名颜色 */
-}
-
-/* 内置对象和类型样式 */
-pre code .hljs-built_in,
-pre code .hljs-type {
-    color: blue; /* 内置对象和类型颜色 */
-    font-weight: bold; /* 加粗 */
-}
-/* 关键字样式 */
-pre code .keyword, pre code .hljs-keyword {
-    color: #d73a49; /* 关键字颜色 */
-    font-weight: bold; /* 加粗 */
-}
-
-/* 字符串样式 */
-pre code .string, pre code .hljs-string {
-    color: #6a8759; /* 字符串颜色 */
-}
-
-/* 注释样式 */
-pre code .comment, pre code .hljs-comment {
-    color: #757575; /* 注释颜色 */
-    font-style: italic; /* 斜体 */
-}
-
-/* 函数样式 */
-pre code .function, pre code .hljs-function {
-    color: #dc8c34; /* 函数颜色 */
-}
-
-/* 内置对象和类型样式 */
-pre code .built_in, pre code .type, pre code .hljs-built_in, pre code .hljs-type {
-    color: #b58900; /* 内置对象和类型颜色 */
-    font-weight: bold; /* 加粗 */
-}
+pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#abb2bf;background:#282c34}.hljs-comment,.hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,.hljs-formula,.hljs-keyword{color:#c678dd}.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-addition,.hljs-attribute,.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#98c379}.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#d19a66}.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#61aeee}.hljs-built_in,.hljs-class .hljs-title,.hljs-title.class_{color:#e6c07b}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-link{text-decoration:underline}
 </style>
+<script src="highlight.min.js"></script>
+<script src="test.js"></script>
+
 
 ## IO包及BIO相关 关键类
 

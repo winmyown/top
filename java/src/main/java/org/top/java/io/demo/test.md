@@ -38,10 +38,6 @@ pre code .hljs-keyword {
     font-weight: bold;
 }
 </style>
-<!-- TOC -->
-* [hello world](#hello-world)
-  * [asdfadsf](#asdfadsf)
-<!-- TOC -->
 
 # hello world
 
