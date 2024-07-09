@@ -65,10 +65,9 @@ pre code .built_in, pre code .type, pre code .hljs-built_in, pre code .hljs-type
     font-weight: bold; /* 加粗 */
 }
 </style>
-这是一个内联公式：$E = mc^2$。
 
 ## IO包及BIO相关 关键类
-：Γ(n)=(n−1)!∀n∈N
+
 ```java
 import java.io.*;
 
