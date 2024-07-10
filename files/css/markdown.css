@@ -3,7 +3,7 @@
     --strong: rgb(240, 59, 31);
     --italic: rgb(240, 59, 31);
     --a: blue;
-    --code: rgb(245, 245, 213, 0.2);
+    --code: rgb(245, 245, 213, 0.7);
     /*--font: #bbbbbb*/
 }
 @charset "UTF-8";
@@ -277,7 +277,7 @@ code {
     border-radius: 2px;
     overflow-x: auto;
     background-color: var(--code);
-    color: #fff;
+    color: #444;
     font-size: .87em;
     padding: .07em .4em
 }
