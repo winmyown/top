@@ -49,7 +49,31 @@ asdf
 <summary>sdfa</summary>
 
 ```java
+/**
+ * <p>线程注释提供要运行的默认线程数。</p>
+ *
+ * <p>此注释可以放在 {@link Benchmark} 方法以生效
+ * 仅在该方法上，或在封闭类实例上具有效果
+ * 在类中的所有 {@link Benchmark} 方法上。此注释可能是
+ * 被运行时选项覆盖。</p>
+ */
+@Inherited
+@Target({ElementType.METHOD,ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Threads {
 
+    /**
+     * The magic value for MAX threads.
+     * This means Runtime.getRuntime().availableProcessors() threads.
+     */
+    int MAX = -1;
+
+    /**
+     * @return Number of threads; use Threads.MAX to run with all available threads.
+     */
+    int value();
+
+}
 ```
 </details>
 
