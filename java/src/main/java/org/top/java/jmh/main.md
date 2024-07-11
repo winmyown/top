@@ -2,6 +2,23 @@
 
 [详细示例介绍](https://heapdump.cn/article/2985869)
 
+# JMH 基准测试注解列表
+
+| 阶段           | 注解          | 功能                                                | 示例代码                                                   |
+|----------------|---------------|-----------------------------------------------------|------------------------------------------------------------|
+| 准备阶段       | @Setup        | 在基准测试运行之前执行准备工作                       | ```java<br>@Setup(Level.Trial)<br>public void setUp() {<br>    // 准备工作<br>}``` |
+|                | @State        | 定义测试状态，表示在基准测试过程中共享的数据          | ```java<br>@State(Scope.Thread)<br>public static class MyState {<br>    // 状态变量<br>}``` |
+| 预热阶段       | @Warmup       | 配置预热设置，包括预热迭代次数和每次迭代的时间         | ```java<br>@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)<br>public void testMethod() {<br>    // 基准测试代码<br>}``` |
+| 测量阶段       | @Benchmark     | 标记基准测试方法。JMH 会在测量阶段反复调用这个方法     | ```java<br>@Benchmark<br>public void testMethod() {<br>    // 基准测试代码<br>}``` |
+|                | @Measurement  | 配置测量设置，包括测量迭代次数和每次迭代的时间         | ```java<br>@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)<br>public void testMethod() {<br>    // 基准测试代码<br>}``` |
+|                | @BenchmarkMode| 配置基准测试模式，如吞吐量、平均时间、采样时间等       | ```java<br>@BenchmarkMode(Mode.Throughput)<br>@BenchmarkMode({Mode.AverageTime, Mode.SampleTime})<br>public void testMethod() {<br>    // 基准测试代码<br>}``` |
+|                | @OutputTimeUnit| 设置基准测试结果的时间单位                            | ```java<br>@OutputTimeUnit(TimeUnit.MILLISECONDS)<br>public void testMethod() {<br>    // 基准测试代码<br>}``` |
+|                | @Fork         | 配置 fork 设置，指定基准测试运行的次数，每次运行在一个新的 JVM 实例中 | ```java<br>@Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})<br>public void testMethod() {<br>    // 基准测试代码<br>}``` |
+|                | @Threads      | 配置测试运行的线程数                                  | ```java<br>@Threads(4)<br>public void testMethod() {<br>    // 基准测试代码<br>}``` |
+| 收尾阶段       | @TearDown     | 在基准测试运行之后执行清理工作                         | ```java<br>@TearDown(Level.Trial)<br>public void tearDown() {<br>    // 清理工作<br>}``` |
+
+
+
 | 注解            | 参数                               | 说明                                                                                     |
 |-----------------|----------------------------------|-----------------------------------------------------------------------------------------|
 | @Benchmark      | 无                                | 标记方法为基准测试方法。                                                                |

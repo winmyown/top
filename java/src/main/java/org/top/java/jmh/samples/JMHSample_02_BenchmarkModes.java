@@ -34,6 +34,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -173,6 +174,7 @@ public class JMHSample_02_BenchmarkModes {
         Options opt = new OptionsBuilder()
                 .include(JMHSample_02_BenchmarkModes.class.getSimpleName())
                 .forks(1)
+                .resultFormat(ResultFormatType.CSV)
                 .build();
 
         new Runner(opt).run();
