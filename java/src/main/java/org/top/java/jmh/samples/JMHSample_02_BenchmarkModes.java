@@ -174,7 +174,7 @@ public class JMHSample_02_BenchmarkModes {
         Options opt = new OptionsBuilder()
                 .include(JMHSample_02_BenchmarkModes.class.getSimpleName())
                 .forks(1)
-                .resultFormat(ResultFormatType.CSV)
+                .resultFormat(ResultFormatType.JSON)
                 .build();
 
         new Runner(opt).run();
