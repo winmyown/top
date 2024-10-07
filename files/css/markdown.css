@@ -164,6 +164,16 @@ a:hover {
 hr {
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-top-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    border-right-style: none;
     border-top-width: 1px;
     border-bottom-width: 3px;
     border-left-width: 3px;
@@ -172,9 +182,14 @@ hr {
     border-bottom-color: rgba(0, 0, 0, 0.4);
     border-left-color: rgba(0, 0, 0, 0.4);
     border-right-color: rgba(0, 0, 0, 0.4);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-attachment: scroll;
     background-clip: border-box;
     background-color: rgba(0, 0, 0, 0);
-    background-image: linear-gradient(90deg, rgba(248, 57, 41, 0) 0%, var(--theme) 51.79%, rgba(248, 57, 41, 0) 100%);
+    background-image: linear-gradient(90deg, rgb(255, 255, 255) 20%, rgba(248, 57, 41, 0.75) 50%, rgb(255, 255, 255) 80%);
     background-origin: padding-box;
     background-position-x: left;
     background-position-y: top;
