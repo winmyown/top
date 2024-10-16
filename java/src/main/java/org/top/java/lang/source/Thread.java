@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.LockSupport;
+
+import org.top.java.sun.misc.source.VM;
 import sun.reflect.CallerSensitive;
 import sun.reflect.Reflection;
 import sun.security.util.SecurityConstants;
@@ -1398,9 +1400,9 @@ public class Thread implements Runnable {
      * @return 此线程的状态。
      * @since 1.5
      */
-    public java.lang.Thread.State getState() {
+    public Thread.State getState() {
         // 获取当前线程状态
-        return sun.misc.VM.toThreadState(threadStatus);
+        return VM.toThreadState(threadStatus);
     }
     // 添加于 JSR-166
 

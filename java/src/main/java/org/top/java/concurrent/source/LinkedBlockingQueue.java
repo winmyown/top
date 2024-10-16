@@ -1,16 +1,14 @@
 package org.top.java.concurrent.source;
 
 import org.top.java.concurrent.source.locks.ReentrantLock;
-
+import org.top.java.concurrent.source.atomic.AtomicInteger;
 import java.util.AbstractQueue;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Spliterator;
 import java.util.Spliterators;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.function.Consumer;
 

@@ -1,5 +1,6 @@
 package org.top.java.concurrent.source;
 
+import org.top.java.concurrent.source.atomic.AtomicInteger;
 import org.top.java.concurrent.source.locks.AbstractQueuedSynchronizer;
 import org.top.java.concurrent.source.locks.ReentrantLock;
 
@@ -7,15 +8,9 @@ import java.security.AccessControlContext;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.*;
-import java.util.concurrent.AbstractExecutorService;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 
 /**
