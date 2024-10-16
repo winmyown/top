@@ -3,11 +3,30 @@ package org.top.java.lang.source;
 import sun.misc.VM;
 
 import java.io.PrintStream;
-import java.util.Arrays; /**
+import java.util.Arrays;
+
+/**
  * @Author zack
  * @Description
  * @Date 2024/10/15 上午7:54
  */
+/**
+ * 一个线程组代表了一组线程。此外，线程组还可以包含其他线程组。
+ * 线程组形成了一棵树，除了初始线程组外，每个线程组都有一个父线程组。
+ * <p>
+ * 线程被允许访问关于它自己的线程组的信息，但不能访问其线程组的父线程组或任何其他线程组的信息。
+ *
+ * @author 未署名
+ * @since JDK1.0
+ */
+/* 这个代码的锁定策略是尽可能只锁定树的一层，而不是多层锁定。
+ * 也就是说，从子线程组向父线程组进行锁定。
+ * 这种策略的好处是可以限制需要持有的锁的数量，尤其是避免必须获取根线程组的锁
+ * （或者一个全局锁），这在有很多线程组的多处理器系统中将成为争用的来源。
+ * 这种策略通常导致对线程组状态进行快照，并在快照的基础上工作，
+ * 而不是在处理子线程时保持线程组锁定。
+ */
+
 public
 class ThreadGroup implements Thread.UncaughtExceptionHandler {
     private final ThreadGroup parent; // 父线程组

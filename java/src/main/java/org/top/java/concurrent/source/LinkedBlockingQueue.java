@@ -19,6 +19,30 @@ import java.util.function.Consumer;
  * @Description
  * @Date 2024/10/15 上午6:59
  */
+/**
+ * 一个基于链节点的、可选是否有界的 {@linkplain BlockingQueue 阻塞队列}。
+ * 该队列按照 FIFO（先进先出）顺序排列元素。
+ * 队列的<em>头部</em>是队列中存在时间最长的元素。
+ * 队列的<em>尾部</em>是队列中存在时间最短的元素。新元素被插入到队列的尾部，
+ * 队列的获取操作则从队列的头部获取元素。
+ * 链式队列通常比基于数组的队列有更高的吞吐量，但在大多数并发应用中性能不如数组队列那样可预测。
+ *
+ * <p>可选的容量限制构造参数提供了一种防止队列过度扩展的方法。
+ * 如果没有指定容量，默认容量等于 {@link Integer#MAX_VALUE}。
+ * 在每次插入时，都会动态创建链节点，除非这会导致队列超出容量限制。
+ *
+ * <p>此类及其迭代器实现了 {@link Collection} 和 {@link Iterator} 接口的所有
+ * <em>可选</em>方法。
+ *
+ * <p>此类是
+ * <a href="{@docRoot}/../technotes/guides/collections/index.html">
+ * Java 集合框架</a>的成员之一。
+ *
+ * @since 1.5
+ * @author Doug Lea
+ * @param <E> 此集合中保存的元素类型
+ */
+
 public class LinkedBlockingQueue<E> extends AbstractQueue<E>
         implements BlockingQueue<E>, java.io.Serializable {
     private static final long serialVersionUID = -6903933977591709194L;

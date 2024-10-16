@@ -1,5 +1,10 @@
 # JMH 预备知识
 
+
+> **Java Microbenchmark Harness**  
+> Java微基准测试工具
+
+
 > 为啥需要JMH，直接用end-start测耗时不行吗
 > 
 

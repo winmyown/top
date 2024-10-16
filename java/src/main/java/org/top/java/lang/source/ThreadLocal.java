@@ -10,6 +10,39 @@ import java.util.function.Supplier;
  * @Description
  * @Date 2024/10/15 上午7:49
  */
+
+/**
+ * 该类提供线程局部变量。与普通变量不同，每个线程访问这些变量（通过其 {@code get} 或 {@code set} 方法）时，都会有自己独立初始化的变量副本。{@code ThreadLocal} 实例通常是类中的私有静态字段，这些类希望将状态与线程关联（例如用户ID或事务ID）。
+ *
+ * <p>例如，下面的类为每个线程生成唯一的局部标识符。
+ * 线程的ID在它第一次调用 {@code ThreadId.get()} 时被分配，并且在后续调用中保持不变。
+ * <pre>
+ * import java.util.concurrent.atomic.AtomicInteger;
+ *
+ * public class ThreadId {
+ *     // 原子整数，包含下一个要分配的线程ID
+ *     private static final AtomicInteger nextId = new AtomicInteger(0);
+ *
+ *     // 线程局部变量，包含每个线程的ID
+ *     private static final ThreadLocal&lt;Integer&gt; threadId =
+ *         new ThreadLocal&lt;Integer&gt;() {
+ *             &#64;Override protected Integer initialValue() {
+ *                 return nextId.getAndIncrement();
+ *         }
+ *     };
+ *
+ *     // 返回当前线程的唯一ID，如有必要则分配
+ *     public static int get() {
+ *         return threadId.get();
+ *     }
+ * }
+ * </pre>
+ * <p>每个线程在其存活期间都隐式地持有对其线程局部变量副本的引用，只要 {@code ThreadLocal} 实例是可访问的；当线程消亡时，所有这些线程局部变量副本都将进行垃圾回收（除非还有其他引用指向这些副本）。
+ *
+ * @author  Josh Bloch 和 Doug Lea
+ * @since   1.2
+ */
+
 public class ThreadLocal<T> {
     /**
      * ThreadLocal 依赖于附加到每个线程的每线程线性探测哈希映射 (Thread.threadLocals 和 inheritableThreadLocals)。

@@ -53,7 +53,7 @@ System.out.println("test");
 }
 ```
 </details>
-  
+
 <hr>
 
 <details>
