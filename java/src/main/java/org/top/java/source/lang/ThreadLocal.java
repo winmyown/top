@@ -4,7 +4,7 @@ import java.lang.ref.WeakReference;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
-
+import java.lang.Object;
 /**
  * @Author zack
  * @Description

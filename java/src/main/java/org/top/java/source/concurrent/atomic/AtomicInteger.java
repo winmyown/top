@@ -6,7 +6,8 @@ package org.top.java.source.concurrent.atomic;
  * @Date 2024/10/16 上午11:25
  */
 
-import sun.misc.Unsafe;
+
+import org.top.java.source.sun.misc.Unsafe;
 
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
