@@ -2,7 +2,6 @@ package org.top.java.source.collection;
 
 import java.util.Collections;
 import java.util.NavigableSet;
-import java.util.SortedMap;
 
 /**
  * {@link SortedMap} 的扩展，提供了导航方法，返回与给定搜索目标最接近的匹配项。

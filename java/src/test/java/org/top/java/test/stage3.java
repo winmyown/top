@@ -23,6 +23,9 @@ import java.util.regex.Pattern;
  */
 public class stage3 {
 
+    /**
+     * 存储翻译结果
+     */
     private static final Map<Integer, String> resultMap = new ConcurrentHashMap<>();
 
     private static final ExecutorService executor= Executors.newFixedThreadPool(10);
@@ -35,36 +38,36 @@ public class stage3 {
     private static DeepSeekClient silicon;
 
     static {
-        tencent = DeepSeekClient.builder()
-                .baseUrl("https://api.lkeap.cloud.tencent.com/v1")
-                .model("deepseek-v3")
-                .openAiApiKey("")
-                .build();
-        deepseek = DeepSeekClient.builder()
-                // .baseUrl("https://api.lkeap.cloud.tencent.com/v1")
-                .model(ChatCompletionModel.DEEPSEEK_CHAT.getValue())
-                .openAiApiKey("")
-                .build();
+        // tencent = DeepSeekClient.builder()
+        //         .baseUrl("https://api.lkeap.cloud.tencent.com/v1")
+        //         .model("deepseek-v3")
+        //         .openAiApiKey("")
+        //         .build();
+        // deepseek = DeepSeekClient.builder()
+        //         // .baseUrl("https://api.lkeap.cloud.tencent.com/v1")
+        //         .model(ChatCompletionModel.DEEPSEEK_CHAT.getValue())
+        //         .openAiApiKey("")
+        //         .build();
         vol = DeepSeekClient.builder()
                 .baseUrl("https://ark.cn-beijing.volces.com/api/v3")
                 .model("ep-20250209140725-wj587")
-                .openAiApiKey("")
+                .openAiApiKey("d633128e-8a3f-4519-b9b3-ce4653ed2931")
                 .build();
-        silicon = DeepSeekClient.builder()
-                .baseUrl("https://api.siliconflow.com/v1")
-                .model("deepseek-ai/DeepSeek-V3")
-                .openAiApiKey("")
-                .build();
+        // silicon = DeepSeekClient.builder()
+        //         .baseUrl("https://api.siliconflow.com/v1")
+        //         .model("deepseek-ai/DeepSeek-V3")
+        //         .openAiApiKey("")
+        //         .build();
     }
 
 
     public static void main(String[] args) throws Exception {
         System.out.println(new Date());
-        String filePath="/Users/develop/winmyown/top/java/src/main/java/org/top/java/source/collection/HashSet.java";
-        // TODO: 1. 取注释
+        String filePath="/Users/develop/winmyown/top/java/src/main/java/org/top/java/source/util/regex/Matcher.java";
+        // TODO: 1. 取源码
         String content=getContent(filePath);
-        // TODO: 2. 放入线程池中调用，并且设置重试次数和重试间隔，存储到map
-        // TODO: 3. join 线程池，获取结果
+        // TODO: 2. 用正则表达式取出所有注释
+        // TODO: 3. 放入线程池中调用Deepseek翻译，将结果存储到resultMap
         regexJavaDoc(content);
         // TODO: 4. 全部替换
         String result=replaceComments(content);
@@ -159,7 +162,9 @@ public class stage3 {
             comment=matcher.group();
             Integer key=Hashing.murmur3_32().hashUnencodedChars(comment).asInt();
             String replace=resultMap.get(key);
-            matcher.appendReplacement(result, replace);
+            String safeReplace = replace.replace("\\", "\\\\").replace("$", "\\$");
+            matcher.appendReplacement(result, safeReplace);
+
             //System.out.println( matcher.group());
         }
         matcher.appendTail(result);

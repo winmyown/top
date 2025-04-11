@@ -26,7 +26,6 @@ package org.top.java.source.util;
 
 import java.util.Comparator;
 import java.util.concurrent.CountedCompleter;
-
 /**
  * Helper utilities for the parallel sort methods in Arrays.parallelSort.
  *

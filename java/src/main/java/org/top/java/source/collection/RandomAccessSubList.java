@@ -25,8 +25,7 @@
 
 package org.top.java.source.collection;
 
-import java.util.List;
-import java.util.RandomAccess;
+//import java.util.RandomAccess;
 
 class RandomAccessSubList<E> extends SubList<E> implements RandomAccess {
     RandomAccessSubList(AbstractList<E> list, int fromIndex, int toIndex) {

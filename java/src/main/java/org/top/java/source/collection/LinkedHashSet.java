@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
- * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 (c) 2000, 2013, Oracle 和/或其附属公司。保留所有权利。
+ * ORACLE 专有/机密。使用受许可条款约束。
  *
  *
  *
@@ -30,84 +30,36 @@ import java.util.Set;
 import java.util.*;
 
 /**
- * <p>Hash table and linked list implementation of the <tt>Set</tt> interface,
- * with predictable iteration order.  This implementation differs from
- * <tt>HashSet</tt> in that it maintains a doubly-linked list running through
- * all of its entries.  This linked list defines the iteration ordering,
- * which is the order in which elements were inserted into the set
- * (<i>insertion-order</i>).  Note that insertion order is <i>not</i> affected
- * if an element is <i>re-inserted</i> into the set.  (An element <tt>e</tt>
- * is reinserted into a set <tt>s</tt> if <tt>s.add(e)</tt> is invoked when
- * <tt>s.contains(e)</tt> would return <tt>true</tt> immediately prior to
- * the invocation.)
+ * <p>哈希表和链表实现的<tt>Set</tt>接口，具有可预测的迭代顺序。此实现与<tt>HashSet</tt>的不同之处在于，它维护了一个贯穿所有条目的双向链表。这个链表定义了迭代顺序，即元素插入到集合中的顺序（<i>插入顺序</i>）。请注意，如果元素<i>重新插入</i>到集合中，插入顺序<i>不会</i>受到影响。（如果<tt>s.add(e)</tt>在<tt>s.contains(e)</tt>返回<tt>true</tt>之前立即调用，则元素<tt>e</tt>被重新插入到集合<tt>s</tt>中。）
  *
- * <p>This implementation spares its clients from the unspecified, generally
- * chaotic ordering provided by {@link java.util.HashSet}, without incurring the
- * increased cost associated with {@link TreeSet}.  It can be used to
- * produce a copy of a set that has the same order as the original, regardless
- * of the original set's implementation:
+ * <p>此实现使客户端免受{@link java.util.HashSet}提供的未指定的、通常混乱的排序，而不会产生与{@link TreeSet}相关的增加的成本。它可以用于生成一个与原始集合具有相同顺序的集合副本，而不管原始集合的实现如何：
  * <pre>
  *     void foo(Set s) {
  *         Set copy = new LinkedHashSet(s);
  *         ...
  *     }
  * </pre>
- * This technique is particularly useful if a module takes a set on input,
- * copies it, and later returns results whose order is determined by that of
- * the copy.  (Clients generally appreciate having things returned in the same
- * order they were presented.)
+ * 如果一个模块接收一个集合作为输入，复制它，然后返回由该副本的顺序确定的结果，这种技术特别有用。（客户端通常希望以它们呈现的顺序返回结果。）
  *
- * <p>This class provides all of the optional <tt>Set</tt> operations, and
- * permits null elements.  Like <tt>HashSet</tt>, it provides constant-time
- * performance for the basic operations (<tt>add</tt>, <tt>contains</tt> and
- * <tt>remove</tt>), assuming the hash function disperses elements
- * properly among the buckets.  Performance is likely to be just slightly
- * below that of <tt>HashSet</tt>, due to the added expense of maintaining the
- * linked list, with one exception: Iteration over a <tt>LinkedHashSet</tt>
- * requires time proportional to the <i>size</i> of the set, regardless of
- * its capacity.  Iteration over a <tt>HashSet</tt> is likely to be more
- * expensive, requiring time proportional to its <i>capacity</i>.
+ * <p>此类提供了所有可选的<tt>Set</tt>操作，并允许空元素。与<tt>HashSet</tt>一样，它为基本操作（<tt>add</tt>、<tt>contains</tt>和<tt>remove</tt>）提供了恒定时间的性能，假设哈希函数将元素正确地分散到桶中。由于维护链表的额外开销，性能可能略低于<tt>HashSet</tt>，但有一个例外：对<tt>LinkedHashSet</tt>的迭代需要与集合的<i>大小</i>成正比的时间，而与其容量无关。对<tt>HashSet</tt>的迭代可能更昂贵，需要与其<i>容量</i>成正比的时间。
  *
- * <p>A linked hash set has two parameters that affect its performance:
- * <i>initial capacity</i> and <i>load factor</i>.  They are defined precisely
- * as for <tt>HashSet</tt>.  Note, however, that the penalty for choosing an
- * excessively high value for initial capacity is less severe for this class
- * than for <tt>HashSet</tt>, as iteration times for this class are unaffected
- * by capacity.
+ * <p>链接哈希集有两个影响其性能的参数：<i>初始容量</i>和<i>负载因子</i>。它们的定义与<tt>HashSet</tt>完全相同。但请注意，选择过高的初始容量值对此类的惩罚比<tt>HashSet</tt>要轻，因为此类的迭代时间不受容量的影响。
  *
- * <p><strong>Note that this implementation is not synchronized.</strong>
- * If multiple threads access a linked hash set concurrently, and at least
- * one of the threads modifies the set, it <em>must</em> be synchronized
- * externally.  This is typically accomplished by synchronizing on some
- * object that naturally encapsulates the set.
+ * <p><strong>请注意，此实现不是同步的。</strong>
+ * 如果多个线程同时访问一个链接哈希集，并且至少有一个线程修改了该集合，则它<em>必须</em>在外部进行同步。这通常通过同步某些自然封装集合的对象来实现。
  *
- * If no such object exists, the set should be "wrapped" using the
- * {@link Collections#synchronizedSet Collections.synchronizedSet}
- * method.  This is best done at creation time, to prevent accidental
- * unsynchronized access to the set: <pre>
+ * 如果不存在这样的对象，则应使用{@link Collections#synchronizedSet Collections.synchronizedSet}方法“包装”该集合。最好在创建时完成此操作，以防止意外地不同步访问集合：<pre>
  *   Set s = Collections.synchronizedSet(new LinkedHashSet(...));</pre>
  *
- * <p>The iterators returned by this class's <tt>iterator</tt> method are
- * <em>fail-fast</em>: if the set is modified at any time after the iterator
- * is created, in any way except through the iterator's own <tt>remove</tt>
- * method, the iterator will throw a {@link ConcurrentModificationException}.
- * Thus, in the face of concurrent modification, the iterator fails quickly
- * and cleanly, rather than risking arbitrary, non-deterministic behavior at
- * an undetermined time in the future.
+ * <p>此类<tt>iterator</tt>方法返回的迭代器是<em>快速失败</em>的：如果在创建迭代器之后的任何时间修改了集合，除非通过迭代器自己的<tt>remove</tt>方法，否则迭代器将抛出{@link ConcurrentModificationException}。因此，在并发修改的情况下，迭代器会快速而干净地失败，而不是冒着在未来的不确定时间出现任意、非确定性行为的风险。
  *
- * <p>Note that the fail-fast behavior of an iterator cannot be guaranteed
- * as it is, generally speaking, impossible to make any hard guarantees in the
- * presence of unsynchronized concurrent modification.  Fail-fast iterators
- * throw <tt>ConcurrentModificationException</tt> on a best-effort basis.
- * Therefore, it would be wrong to write a program that depended on this
- * exception for its correctness:   <i>the fail-fast behavior of iterators
- * should be used only to detect bugs.</i>
+ * <p>请注意，迭代器的快速失败行为无法得到保证，因为一般来说，在存在不同步的并发修改的情况下，无法做出任何硬性保证。快速失败迭代器会尽最大努力抛出<tt>ConcurrentModificationException</tt>。因此，编写依赖此异常来保证程序正确性的程序是错误的：<i>迭代器的快速失败行为应仅用于检测错误。</i>
  *
- * <p>This class is a member of the
+ * <p>此类是
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
- * Java Collections Framework</a>.
+ * Java集合框架</a>的成员。
  *
- * @param <E> the type of elements maintained by this set
+ * @param <E> 此集合维护的元素类型
  *
  * @author  Josh Bloch
  * @see     Object#hashCode()
@@ -126,47 +78,39 @@ public class LinkedHashSet<E>
     private static final long serialVersionUID = -2851667679971038690L;
 
     /**
-     * Constructs a new, empty linked hash set with the specified initial
-     * capacity and load factor.
+     * 构造一个新的、空的链接哈希集，具有指定的初始容量和负载因子。
      *
-     * @param      initialCapacity the initial capacity of the linked hash set
-     * @param      loadFactor      the load factor of the linked hash set
-     * @throws     IllegalArgumentException  if the initial capacity is less
-     *               than zero, or if the load factor is nonpositive
+     * @param      initialCapacity 链接哈希集的初始容量
+     * @param      loadFactor      链接哈希集的负载因子
+     * @throws     IllegalArgumentException 如果初始容量小于零，或者负载因子为非正数
      */
     public LinkedHashSet(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor, true);
     }
 
     /**
-     * Constructs a new, empty linked hash set with the specified initial
-     * capacity and the default load factor (0.75).
+     * 构造一个新的、空的链接哈希集，具有指定的初始容量和默认负载因子（0.75）。
      *
-     * @param   initialCapacity   the initial capacity of the LinkedHashSet
-     * @throws  IllegalArgumentException if the initial capacity is less
-     *              than zero
+     * @param   initialCapacity   链接哈希集的初始容量
+     * @throws  IllegalArgumentException 如果初始容量小于零
      */
     public LinkedHashSet(int initialCapacity) {
         super(initialCapacity, .75f, true);
     }
 
     /**
-     * Constructs a new, empty linked hash set with the default initial
-     * capacity (16) and load factor (0.75).
+     * 构造一个新的、空的链接哈希集，具有默认的初始容量（16）和加载因子（0.75）。
      */
     public LinkedHashSet() {
         super(16, .75f, true);
     }
 
     /**
-     * Constructs a new linked hash set with the same elements as the
-     * specified collection.  The linked hash set is created with an initial
-     * capacity sufficient to hold the elements in the specified collection
-     * and the default load factor (0.75).
+     * 构造一个新的链接哈希集，包含指定集合中的相同元素。
+     * 链接哈希集的初始容量足以容纳指定集合中的元素，并使用默认的加载因子（0.75）。
      *
-     * @param c  the collection whose elements are to be placed into
-     *           this set
-     * @throws NullPointerException if the specified collection is null
+     * @param c  要将其元素放入此集合的集合
+     * @throws NullPointerException 如果指定的集合为null
      */
     public LinkedHashSet(Collection<? extends E> c) {
         super(Math.max(2*c.size(), 11), .75f, true);
@@ -174,22 +118,19 @@ public class LinkedHashSet<E>
     }
 
     /**
-     * Creates a <em><a href="Spliterator.html#binding">late-binding</a></em>
-     * and <em>fail-fast</em> {@code Spliterator} over the elements in this set.
+     * 创建一个<em><a href="Spliterator.html#binding">延迟绑定</a></em>
+     * 并且<em>快速失败</em>的 {@code Spliterator}，用于遍历此集合中的元素。
      *
-     * <p>The {@code Spliterator} reports {@link Spliterator#SIZED},
-     * {@link Spliterator#DISTINCT}, and {@code ORDERED}.  Implementations
-     * should document the reporting of additional characteristic values.
+     * <p>该 {@code Spliterator} 报告 {@link Spliterator#SIZED}、
+     * {@link Spliterator#DISTINCT} 和 {@code ORDERED}。实现应记录其他特征值的报告。
      *
      * @implNote
-     * The implementation creates a
-     * <em><a href="Spliterator.html#binding">late-binding</a></em> spliterator
-     * from the set's {@code Iterator}.  The spliterator inherits the
-     * <em>fail-fast</em> properties of the set's iterator.
-     * The created {@code Spliterator} additionally reports
-     * {@link Spliterator#SUBSIZED}.
+     * 该实现从集合的 {@code Iterator} 创建一个
+     * <em><a href="Spliterator.html#binding">延迟绑定</a></em> 的 spliterator。
+     * 该 spliterator 继承了集合迭代器的<em>快速失败</em>属性。
+     * 创建的 {@code Spliterator} 还报告 {@link Spliterator#SUBSIZED}。
      *
-     * @return a {@code Spliterator} over the elements in this set
+     * @return 一个 {@code Spliterator}，用于遍历此集合中的元素
      * @since 1.8
      */
     @Override
